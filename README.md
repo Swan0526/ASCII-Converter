@@ -1,6 +1,6 @@
 # ASCII-Converter
 ASCII Converter for video and image
-<br>
+<br><br>
 <img src="Image_example/rick.jpg" alt="Image 1" width="40%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Image_example/rick_reducer-set-to_3.png" alt="Image 2" width="40%"/>
 
 ## Requierement
@@ -16,6 +16,49 @@ pip install opencv-python
 pip install moviepy
 ```
 You can use the **start_IMAGE.bat** or **start_VIDEO.bat** and it will install all the requieremnt and launch the converter
+
+## How to use
+
+### Convert image
+Start **ASCII_Converter.py** if you already have the requierement or you if you are not sure use **start_IMAGE.bat**
+```
+Drag and drop your picture here :
+```
+You can drag and drop your local picture in a **jpg** format (Don't use *png* the program does not support transparancy)
+<br><br>
+Then you will have to set a reducer 
+> 1 : no reduction (for really small image)
+
+> 3 : Generally best result
+
+> 4 or greater : big reduction (for big image)
+
+```
+Enter the ammount of reduction, the greater the number the smaller the image
+```
+All done for the image ! (*You can test different reduction for better result*)
+<hr>
+
+### Convert video
+Start **ASCII_Converter_Video_Edition.py** if you already have the requierement or you if you are not sure use **start_VIDEO.bat**
+```
+Drag and drop your video here :
+```
+You can drag and drop your local picture in a **mp4** or **gif** format
+<br><br>
+Then you will have to set a reducer 
+> 1 : no reduction (for really small definition)
+
+> 3 : Generally best result
+
+> 4 or greater : big reduction (for big definition)
+
+```
+Enter the ammount of reduction, the greater the number the smaller the image
+```
+All done for the video ! (*You can test different reduction for better result*)
+<br><br>
+*Please note that this process requiere a lot of ram if the video is long, try on short video*
 
 ## The converter
 
@@ -42,8 +85,9 @@ You change the character in each ```fichier.write("")``` or the greyscale sensit
 ## Text file
 
 When you render a single image with the **ASCII_Converter.py** you will also have a text file of the image (you need a font that change all character to the same size like **Consola**)
+<br>
+<img src="Image_example/Font_Awesome_5_brands_github.svg_png.jpg" alt="Image 1" width="50%"/>
 
-<img src"Image_example/Font_Awesome_5_brands_github.svg_png.jpg" alt="example"/>
 ```
 ..............................................................................
 ............................ . ...d#@@@@@@A...................................
@@ -107,3 +151,7 @@ When you render a single image with the **ASCII_Converter.py** you will also hav
 ..............................................................................
 ```
 
+## Known issu
+
+- The image is often strech out du to size difference between pixel and character
+- The video can be out of center and not fil the entire screen
