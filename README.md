@@ -80,7 +80,8 @@ elif pixel > 50:
 else:
     fichier.write("@")
 ```
-You can change the character in each `fichier.write("")` or the greyscale sensitivity in each test `if pixel > 230`. If you want the character to apply for a very bright white, you can put `if pixel > 250`.
+You can change the character in each `fichier.write("")` or the greyscale sensitivity in each test. <br>
+Example : `if pixel > 230`,if you want the character to apply for a very bright white, you can put `if pixel > 250`.
 
 ## Text File
 
