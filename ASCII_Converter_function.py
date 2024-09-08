@@ -1,13 +1,13 @@
 from PIL import Image,ImageFont,ImageDraw
+from tqdm import tqdm
+from math import ceil
 import string
 from random import randint
-from math import ceil
-
 
 minu=string.ascii_lowercase
 maj=string.ascii_uppercase
     
-def ASCII_Conv(path,reducer):
+def ASCII_Conv(path,reducer,resolution):
         print("Opening image...")
         img=Image.open(path,"r")
         print("Image opened")
@@ -17,7 +17,6 @@ def ASCII_Conv(path,reducer):
 
         size = img.size
 
-        vertical_reducer=ceil(size[0]/size[1])+2*ceil(size[1]/size[0])
         print("Creating txt file...")
         extention=len(path)-1
         while path[extention]!=".":
@@ -27,11 +26,16 @@ def ASCII_Conv(path,reducer):
         fichier = open(path+"_reducer-set-to_"+str(reducer)+".txt", "w")
         print("Txt file created")
 
-        for y in range(0,size[1],vertical_reducer+(reducer//2)):
-            for x in range(0,size[0],1*reducer):
+        fnt = ImageFont.truetype("Consolas-Font/Consolas.ttf", resolution)
+        char_bbox = fnt.getbbox("a")
+        font_width = char_bbox[2] - char_bbox[0]
+        font_height = char_bbox[3] - char_bbox[1]  
+
+        for y in tqdm(range(0,size[1],reducer)):
+            for x in range(0,size[0],reducer):
                 pixel=pix_val[y*size[0]+x][0]
                 if pixel>230:
-                    fichier.write("\u00a0")
+                    fichier.write(" ")
                 elif pixel>199:
                     fichier.write(".")
                 elif pixel>180:
@@ -44,18 +48,16 @@ def ASCII_Conv(path,reducer):
                     fichier.write("#")
                 else:
                     fichier.write("@")
+                fichier.write(" ")
                     
             fichier.write("\n")
-            if y/size[1]==0.25:
-                print("Stage : 25% Done")
-            if y/size[1]==0.50:
-                print("Stage : 50% Done")
-            if y/size[1]==0.75:
-                print("Stage : 75% Done")
+
+        print(font_height)
+        print(font_width)
+
         fichier.close()
         print("Creating image...")
-        img = Image.new('RGB', (int(((size[0]+120)*10)/reducer), int(((size[1]+120)*10)/reducer)), color = (255,255,255))
-        fnt = ImageFont.truetype("Consolas-Font/Consolas.ttf", 20)
+        img = Image.new('RGB', (ceil(size[0]/reducer*font_width*2) , ceil(size[1]/reducer*font_height*1.9)), color = (255,255,255))
         ascii_text=open(path+"_reducer-set-to_"+str(reducer)+".txt")
 
         ImageDraw.Draw(img).text((0,0), ascii_text.read(), font=fnt, fill=(0,0,0))

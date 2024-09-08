@@ -1,4 +1,3 @@
-from PIL import Image,ImageFont,ImageDraw
 from ASCII_Converter_function import ASCII_Conv
 from moviepy.editor import *
 import cv2
@@ -7,22 +6,23 @@ import shutil
 
 def vid_converter():
     global reducer, number_frame_exact
-    path=input("Drag and drop your video here :")
+    path=input("Drag and drop your video here : ")
     if path[0]=='"':
         path=path[1:]
     if path[len(path)-1]=='"':
         path=path[:(len(path)-1)]
 
-    reducer=int(input("Enter the ammount of reduction, the greater the number the smaller the image"))
-    if reducer < 1:
-        reducer = 1
+    reducer = 1
+
+    resolution = 10
+
     frame_extractor(path)
     clip = VideoFileClip(path)
     current_fps=clip.fps
     duration=clip.duration
     frame_number=int(duration*current_fps)
     for i in range(frame_number-1):
-        ASCII_Conv(path+"_temp/"+str(i)+".png",reducer)
+        ASCII_Conv(path+"_temp/"+str(i)+".png",reducer,resolution)
         print("Frame "+str(i)+" / "+str(frame_number)+" Done")
         number_frame_exact=i
     compil(clip,path,current_fps)

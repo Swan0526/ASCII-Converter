@@ -1,23 +1,27 @@
-from PIL import Image,ImageFont,ImageDraw
-import string
-from random import randint
-from math import ceil
 from ASCII_Converter_function import ASCII_Conv
 
-minu=string.ascii_lowercase
-maj=string.ascii_uppercase
-
 def Pic_converter():
-    path=input("Drag and drop your picture here :")
+    path=input("Drag and drop your picture here : ")
     if path[0]=='"':
         path=path[1:]
     if path[len(path)-1]=='"':
         path=path[:(len(path)-1)]
 
-    reducer=int(input("Enter the ammount of reduction, the greater the number the smaller the image"))
+    reducer = int(input("Enter the ammount of reduction, the greater the number the smaller the image (1 - 32): "))
+
+    resolution = int(input("Choose the resolution (1 - 20) : "))
+
     if reducer < 1:
         reducer = 1
-    ASCII_Conv(path,reducer)
+    if reducer > 32:
+        reducer = 32
+
+    if resolution < 1:
+        resolution = 1
+    if resolution > 20:
+        resolution = 20
+
+    ASCII_Conv(path,reducer,resolution)
     print("Done !")
 
 while True:
